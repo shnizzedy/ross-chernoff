@@ -68,7 +68,7 @@ var simple = false;
 
 
 function preload(){
-  data = loadTable("data/bobross.csv","csv","header");
+  data = loadTable("data/CHI2018.csv","csv","header");
 }
 
 function setup(){
@@ -79,9 +79,9 @@ function setup(){
     I think it's nice when things represent what they're supposed to, don't you?
   */
 
-  cloud_series = data.getColumn("Clouds%").map(Number);
-  mountain_series = data.getColumn("Mountains%").map(Number);
-  tree_series = data.getColumn("Trees%").map(Number);
+  cloud_series = data.getColumn("Sleep Percent").map(Number);
+  mountain_series = data.getColumn("Wake Percent").map(Number);
+  tree_series = data.getColumn("People Percent").map(Number);
 
 /*
   We'll just define each of our colors while we're at it:
@@ -148,11 +148,11 @@ function drawFancy(){
     But, just as a painting isn't complete without a signature,
     our visualization isn't complete without axes, and data provenance.
   */
-  drawXScale("Season of \"Joy of Painting\"",1,31,32);
-  drawYScale("How Often Bob Ross Painted It (%)","Clouds",0,1,"Mountains",0,1,"Trees",0,1);
-  d3.select("body").append("p")
+  drawXScale("April",21,26,7);
+  drawYScale("Time in Montréal for CHI 2018","asleep",0,1,"awake",0,1,"number of people",0,2);
+  /*d3.select("body").append("p")
   .style("font-size","0.8em")
-  .html("Data from <a href=\"https://fivethirtyeight.com/features/a-statistical-analysis-of-the-work-of-bob-ross/\">FiveThirtyEight</a>");
+  .html("Data from <a href=\"https://fivethirtyeight.com/features/a-statistical-analysis-of-the-work-of-bob-ross/\">FiveThirtyEight</a>"); */
 
   /*
    And that's it! We've got a finished painting of three time series.
@@ -632,9 +632,9 @@ function drawYScale(aName,cName,cMin,cMax,mName,mMin,mMax,tName,tMin,tMax){
     Let's start with our cloud axis, right up there at the top.
   */
 
-  var cY = d3.scaleLinear().domain([cMin,cMax]).range([height/4, 0]);
+  var cY = d3.scaleLinear().domain([cMin,cMax]).range([height/4, 4]);
   var caxis = d3.axisRight(cY);
-  caxis.ticks(4,"0%");
+  caxis.ticks(2,"0%");
   ysvg.append("g")
     .attr("id","cloudaxis")
     .style("stroke",thalo_blue)
@@ -658,9 +658,9 @@ function drawYScale(aName,cName,cMin,cMax,mName,mMin,mMax,tName,tMin,tMax){
   /*
     Now it's time for our mountain axis. Just a straightforward y axis.
   */
-  var mY = d3.scaleLinear().domain([tMin,tMax]).range([height/2, height/4]);
+  var mY = d3.scaleLinear().domain([mMin,mMax]).range([height/2, height/4]);
   var maxis = d3.axisRight(mY);
-  maxis.ticks(4,"0%");
+  maxis.ticks(2,"0%");
   ysvg.append("g")
     .attr("id","mtnaxis")
     .style("stroke",dark_sienna)
@@ -685,7 +685,7 @@ function drawYScale(aName,cName,cMin,cMax,mName,mMin,mMax,tName,tMin,tMax){
   */
   var tY = d3.scaleLinear().domain([tMin,tMax]).range([3*(height/4), height/2]);
   var taxis = d3.axisRight(tY);
-  taxis.ticks(4,"0%");
+  taxis.ticks(2,"0");
   ysvg.append("g")
     .attr("id","treeaxis")
     .style("stroke",sap_green)
@@ -698,7 +698,7 @@ function drawYScale(aName,cName,cMin,cMax,mName,mMin,mMax,tName,tMin,tMax){
 
   ysvg.append("text")
     .attr("y", "-40px")
-    .attr("x", tY(tMin+  (tMax-tMin)/2)    )
+    .attr("x", tY(tMin+  (tMax-tMin)/4)    )
     .attr("transform", "rotate(90)")
     .attr("font-size","0.8em")
     .style("text-anchor","middle")
