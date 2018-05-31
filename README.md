@@ -1,5 +1,7 @@
 # ross-chernoff
 
+Forked from [mcorrell/ross-chernoff](https://github.com/mcorrell/ross-chernoff); the documentation below is from the upstream repository.
+
 ## Ross extension to Chernoff faces
 
 This code is for generating your own "Ross-Chernoff" glyphs, such as the one [here](https://mcorrell.github.io/ross-chernoff/). These are glyphs for showing multiple time series, or high dimensional data, in the style of American Public Television star and landscape painter [Bob Ross](https://en.wikipedia.org/wiki/Bob_Ross).
